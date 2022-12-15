@@ -1,29 +1,60 @@
 <template>
-  <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Tab 1</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab 1</ion-title>
-        </ion-toolbar>
-      </ion-header>
-    
-      <ExploreContainer name="Tab 1 page" />
-    </ion-content>
-  </ion-page>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label position="floating">Insira seu Nome</ion-label>
+      <ion-input tab="tab1" href="keyboardWillShow" keyboardWillShow placeholder="Enter text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" placeholder="Enter text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input type="password" placeholder="Enter text"></ion-input>
+    </ion-item>
+
+  </ion-list>
+  <ion-button shape="round">Round</ion-button>
+
+
+
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
 
-export default  defineComponent({
-  name: 'Tab1Page',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+<script lang="ts">
+import { IonInput, IonItem, IonLabel, IonList, IonButton } from '@ionic/vue';
+import { Keyboard } from '@capacitor/keyboard';
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  components: { IonInput, IonItem, IonLabel, IonList, IonButton },
+  ionicViewDidEnter() {
+    Keyboard.addListener('keyboardWillShow', info => {
+      console.log('keyboard will show with height:', info.keyboardHeight);
+    });
+
+    Keyboard.addListener('keyboardDidShow', info => {
+      console.log('keyboard did show with height:', info.keyboardHeight);
+    });
+
+    Keyboard.addListener('keyboardWillHide', () => {
+      console.log('keyboard will hide');
+    });
+
+    Keyboard.addListener('keyboardDidHide', () => {
+      console.log('keyboard did hide');
+    });
+  }
 });
+
+
+
+
+
+
+
 </script>
