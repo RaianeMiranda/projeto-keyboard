@@ -1,0 +1,7 @@
+{
+  "name": "projeto-keyboard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
